@@ -3,20 +3,19 @@ import time
 from selenium.webdriver.support.ui import Select
 
 from parser_model import Parser
-
-URL = 'https://sudrf.ru/index.php?id=300#sp/'
+from constants import SUDRF_URL, INPUT_PATH, OUTPUT_PATH
 
 
 class SudrfParser(Parser):
     def go_to_search(self):
         """Открытие сайта и формы поиска."""
-        self.get_url(URL)
+        self.get_url(SUDRF_URL)
         self.dr.find_element_by_id('spLink').click()
         self.dr.implicitly_wait(5)
 
     def get_data(self):
         """Получение данных из файла."""
-        wb = self.excel.Workbooks.Open(r'C:\Dev\parsers\input.xlsx')
+        wb = self.excel.Workbooks.Open(INPUT_PATH)
         ws = wb.ActiveSheet
         human_data = [str(r[0].value) for r in ws.Range('A1:B1')]
         entered_data = ' '.join(human_data)
@@ -67,7 +66,7 @@ class SudrfParser(Parser):
             row += 20
             self.parse_pages()[-1].click()
 
-        new_wb.SaveAs(r'C:\Dev\parsers\output.xlsx')
+        new_wb.SaveAs(OUTPUT_PATH)
         print('Данные успешно собраны в файл output.xlsx')
         new_wb.Close()
         self.excel.Quit()

@@ -3,14 +3,13 @@ import time
 from selenium.common.exceptions import NoSuchElementException
 
 from parser_model import Parser
-
-URL = 'https://fssp.gov.ru/'
+from constants import FSSP_URL, INPUT_PATH, OUTPUT_PATH
 
 
 class FsspParser(Parser):
     def go_to_search(self):
         """Открытие формы поиска."""
-        self.get_url(URL)
+        self.get_url(FSSP_URL)
         self.dr.find_element_by_css_selector(
             'button.tingle-modal__close').click()
         self.dr.find_element_by_link_text('Расширенный поиск').click()
@@ -18,7 +17,7 @@ class FsspParser(Parser):
 
     def get_data(self):
         """Получение данных из файла."""
-        wb = self.excel.Workbooks.Open(r'C:\Dev\parsers\input.xlsx')
+        wb = self.excel.Workbooks.Open(INPUT_PATH)
         ws = wb.ActiveSheet
         human_data = [str(r[0].value) for r in ws.Range('A1:D1')]
         entered_data = {
@@ -102,7 +101,7 @@ class FsspParser(Parser):
             links = self.dr.find_elements_by_xpath('//div[@class="context"]/a')
             links[-1].click()
 
-        new_wb.SaveAs(r'C:\Dev\parsers\output.xlsx')
+        new_wb.SaveAs(OUTPUT_PATH)
         print('Данные успешно собраны в файл output.xlsx')
         new_wb.Close()
         self.excel.Quit()

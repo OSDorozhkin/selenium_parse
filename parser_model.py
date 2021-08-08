@@ -5,6 +5,8 @@ from selenium import webdriver
 from urllib.request import urlopen
 import win32com.client
 
+from constants import DRIVER_PATH
+
 
 class Parser:
     def __init__(self):
@@ -12,7 +14,7 @@ class Parser:
         options = webdriver.ChromeOptions()
         options.add_argument('--disable-blink-features=AutomationControlled')
         driver = webdriver.Chrome(
-            executable_path='C:\\Dev\\parsers\\chrome\\chromedriver.exe',
+            executable_path=DRIVER_PATH,
             options=options,
         )
         self.dr = driver

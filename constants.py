@@ -1,0 +1,5 @@
+DRIVER_PATH = r'C:\Dev\parsers\chrome\chromedriver.exe'
+FSSP_URL = 'https://fssp.gov.ru/'
+SUDRF_URL = 'https://sudrf.ru/index.php?id=300#sp/'
+INPUT_PATH = r'C:\Dev\parsers\input.xlsx'
+OUTPUT_PATH = r'C:\Dev\parsers\output.xlsx'
