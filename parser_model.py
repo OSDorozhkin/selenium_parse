@@ -5,7 +5,7 @@ from selenium import webdriver
 from urllib.request import urlopen
 import win32com.client
 
-from constants import DRIVER_PATH
+from constants import DRIVER_PATH, TESSERACT_PATH
 
 
 class Parser:
@@ -34,9 +34,7 @@ class Parser:
 
     def captcha(self, image):
         """Распознавание текста на капче."""
-        pytesseract.pytesseract.tesseract_cmd = (
-            r'D:\Tesseract_ORC\tesseract.exe'
-        )
+        pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
         img = cv2.cvtColor(self.url_to_image(image), cv2.COLOR_BGR2RGB)
         gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
         _, binar = cv2.threshold(gray, 80, 255, cv2.THRESH_BINARY)

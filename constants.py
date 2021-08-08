@@ -1,4 +1,5 @@
 DRIVER_PATH = r'C:\Dev\parsers\chrome\chromedriver.exe'
+TESSERACT_PATH = r'D:\Tesseract_ORC\tesseract.exe'
 FSSP_URL = 'https://fssp.gov.ru/'
 SUDRF_URL = 'https://sudrf.ru/index.php?id=300#sp/'
 INPUT_PATH = r'C:\Dev\parsers\input.xlsx'
